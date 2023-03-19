@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"icl-posts/domain/model"
 	"icl-posts/usecase/repository"
+	"log"
 
 	"gorm.io/gorm"
 	"gorm.io/gorm/clause"
@@ -60,10 +61,15 @@ func (pr *postRepository) Update(id uint, changes *model.Post) (*model.Post, err
 		return nil, err
 	}
 
+	log.Printf("Updating, changes %+v", changes)
 	err = pr.db.Model(&existingPost).
 		// IMPORTANT: don't allow to update assocoiations
 		Omit(clause.Associations).
 		Updates(changes).Error
+	if err != nil {
+		log.Println("Update error", err)
+		return nil, err
+	}
 
 	return &existingPost, nil
 }
