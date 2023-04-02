@@ -3,8 +3,8 @@ package router
 import (
 	"icl-posts/adapter/controller"
 
-	"github.com/labstack/echo"
-	"github.com/labstack/echo/middleware"
+	"github.com/labstack/echo/v4"
+	"github.com/labstack/echo/v4/middleware"
 )
 
 func NewRouter(e *echo.Echo, ac controller.AppController) *echo.Echo {

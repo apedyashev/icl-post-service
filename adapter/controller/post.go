@@ -9,7 +9,7 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/labstack/echo"
+	"github.com/labstack/echo/v4"
 	"gorm.io/gorm"
 )
 
@@ -132,7 +132,6 @@ func (pc *postController) AddComment(ctx echo.Context) error {
 	commentData.PostId = uint(postId)
 
 	comment, err := pc.postUsecase.AddComment(uint(postId), &commentData)
-	// comment, err := pc.commentUsecase.Create(&commentData)
 	if err != nil {
 		return ctx.JSON(http.StatusInternalServerError, "cannot create comment")
 	}
